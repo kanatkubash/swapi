@@ -17,6 +17,7 @@ export default new Router({
     {
       path: '/characters',
       component: Characters,
+      props: route => route.query,
     },
     {
       path: '/characters/:id',

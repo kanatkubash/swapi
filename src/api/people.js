@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axios } from './axios';
 import { ENDPOINT as ROOT } from './config';
 
 const ENDPOINT = `${ROOT}/people/`;
@@ -24,6 +24,27 @@ export const getAll = async (handler = null) => {
   return allItems;
 };
 
-export const search = async search => {
-  let { data } = await axios.get(`${ENDPOINT}`, { params: { search } });
+export const search = async (search, handler = null) => {
+  let page = 1;
+  let allItems = [];
+  while (true) {
+    let { data } = await axios.get(`${ENDPOINT}`, { params: { search, page } });
+    let { results, next } = data;
+
+    if (results && results.length > 0) allItems.push(...results);
+    else break;
+
+    if (handler) handler(results);
+
+    if (next) page += 1;
+    else break;
+  }
+
+  return allItems;
+};
+
+export const get = async id => {
+  let { data } = await axios.get(`${ENDPOINT}${id}`);
+
+  return data;
 };

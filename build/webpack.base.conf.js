@@ -48,8 +48,19 @@ module.exports = {
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig,
+        loader: [
+          {
+            loader: 'vue-loader',
+            options: vueLoaderConfig,
+          },
+          {
+            loader: 'string-replace-loader',
+            options: {
+              search: '// @',
+              replace: '@',
+            },
+          },
+        ],
       },
       {
         test: /\.js$/,
