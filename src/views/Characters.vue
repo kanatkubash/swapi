@@ -20,6 +20,14 @@
           </template>
           <span v-else-if="searchDone">Search results</span>
         </h3>
+
+        <people-brief
+          v-for="people in peoples"
+          :key="people.url"
+        >
+          1
+        </people-brief>
+
       </div>
     </div>
   </div>
@@ -27,7 +35,8 @@
 
 <script>
 import { debounce } from '@/helpers/decorators';
-import { sleepMs } from '@/helpers';
+import { getAll } from '@/api/people';
+import PeopleBrief from '@/components/PeopleBrief';
 
 const SEARCH_IDLE = 0;
 const SEARCH_SEARCHING = 1;
@@ -37,7 +46,9 @@ export default {
   data: () => ({
     searchTerm: null,
     searchState: SEARCH_IDLE,
+    peoples: [],
   }),
+  components: { PeopleBrief },
 
   computed: {
     searching() {
@@ -58,7 +69,7 @@ export default {
     @debounce(200)
     async search() {
       this.searchState = SEARCH_SEARCHING;
-      await sleepMs(2000);
+      await getAll(data => this.peoples.push(...data));
       this.searchState = SEARCH_DONE;
     },
   },
