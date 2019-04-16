@@ -1,23 +1,33 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
+import 'bulma/bulma.sass';
+
 export default {
-  name: 'App'
-}
+  name: 'App',
+};
 </script>
 
-<style>
+<style lang="scss">
+@import '~bulma/bulma.sass';
+@import '~assets/colors.scss';
+@import '~assets/app.scss';
+
+body {
+  background: $black;
+  color: $white;
+  min-height: 100vh;
+  margin: 0;
+  overflow: auto;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

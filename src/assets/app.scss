@@ -1,0 +1,11 @@
+@import './colors.scss';
+
+.title,
+.subtitle {
+  color: $white;
+}
+input {
+  color: $black;
+  outline: $blue !important;
+  outline-width: 2px !important;
+}

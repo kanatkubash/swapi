@@ -1,15 +1,32 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Default from '@/views/Default';
+import Characters from '@/views/Characters';
+import Character from '@/views/Character';
+import Ship from '@/views/Ship';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-})
+      component: Default,
+    },
+    {
+      path: '/characters',
+      component: Characters,
+    },
+    {
+      path: '/characters/:id',
+      component: Character,
+      props: true,
+    },
+    {
+      path: '/ship/:id',
+      component: Ship,
+      props: true,
+    },
+  ],
+});
